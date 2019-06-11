@@ -11,8 +11,10 @@ class UploadController extends Controller
 {
     public function execute(Request $request)
     {
-        $input = $request->all();
-        var_dump($input);
-        die('test');
+        $uploadedSong = $request->file('song');
+
+        $file_name = convertVnToEn($uploadedSong->getFilename());
+
+        $uploadedSong->storeAs('songs', $file_name, 'public');
     }
 }

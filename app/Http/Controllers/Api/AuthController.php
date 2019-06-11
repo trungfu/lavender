@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\User;
+use App\Model\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
@@ -25,7 +25,7 @@ class AuthController extends Controller
         }
 
         $request['password'] = Hash::make($request['password']);
-        /** @var \App\User $user */
+        /** @var \App\Model\User $user */
         $user = User::create($request->toArray());
 
         $token = $user->createToken('Laravel Password Grant Client')->accessToken;
@@ -36,7 +36,7 @@ class AuthController extends Controller
 
     public function login(Request $request)
     {
-        /** @var \App\User $user */
+        /** @var \App\Model\User $user */
         $user = User::where('email', $request->email)->first();
 
         if($user) {
