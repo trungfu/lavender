@@ -22,8 +22,8 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::post('/login', 'Api\AuthController@login')->name('login.api');
 Route::post('/register', 'Api\AuthController@register')->name('register.api');
 
-Route::post('/songs/upload', 'Api\Songs\UploadController@execute')->name('songs.upload');
-
 Route::middleware('auth:api')->group(function() {
+    Route::post('/songs/upload', 'Api\Songs\UploadController@execute')->name('songs.upload');
+
     Route::get('/logout', 'Api\AuthController@logout')->name('logout');
 });
