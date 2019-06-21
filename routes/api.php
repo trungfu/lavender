@@ -23,7 +23,8 @@ Route::post('/login', 'Api\AuthController@login')->name('login.api');
 Route::post('/register', 'Api\AuthController@register')->name('register.api');
 
 Route::middleware('auth:api')->group(function() {
-    Route::post('/songs/upload', 'Api\Songs\UploadController@execute')->name('songs.upload');
+    Route::get('/songs/upload', 'Api\Songs\UploadController@get')->name('songs.upload');
+    Route::post('/songs/upload', 'Api\Songs\UploadController@upload')->name('songs.upload');
 
     Route::get('/logout', 'Api\AuthController@logout')->name('logout');
 });
