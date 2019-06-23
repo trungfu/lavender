@@ -9,16 +9,19 @@ class UploadTemporary extends JsonResource
     /**
      * Transform the resource into an array.
      *
-     * @param  \Illuminate\Http\Request $request
+     * @param \Illuminate\Http\Request $request
      * @return array
      */
     public function toArray($request)
     {
         return [
-            'id'      => $this->id,
+            'uid'     => $this->id,
+            'name'    => $this->path,
             'path'    => $this->path,
+            'status'  => 'done',
             'type'    => $this->type,
-            'user_id' => $this->user_id
+            'user_id' => $this->user_id,
+            'url'     => '#'
         ];
     }
 }

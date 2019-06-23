@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Http\Resources\User as UserResource;
 use App\Model\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -42,7 +43,11 @@ class AuthController extends Controller
         if($user) {
             if(Hash::check($request->password, $user->password)) {
                 $token = $user->createToken('Laravel Password Grant Client')->accessToken;
-                $response = ['token' => $token];
+
+                $response = [
+                    'token' => $token,
+                    'user' => new UserResource($user)
+                ];
                 return response($response, 200);
             }
             else {
