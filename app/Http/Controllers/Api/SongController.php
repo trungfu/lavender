@@ -1,20 +1,34 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 
+use App\Api\SongRepositoryInterface;
+use App\Http\Controllers\Controller;
+use App\Http\Resources\Song as SongResource;
 use Illuminate\Http\Request;
 
 class SongController extends Controller
 {
+    protected $songRepository;
+
+    public function __construct(SongRepositoryInterface $songRepository)
+    {
+        $this->songRepository = $songRepository;
+    }
+
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param \Illuminate\Http\Request $request
+     * @return SongResource
      */
     public function store(Request $request)
     {
-        dd($request->all());
+        $postData = $request->all();
+
+        $song = $this->songRepository->persist($postData);
+
+        return new SongResource($song);
     }
 
     /**

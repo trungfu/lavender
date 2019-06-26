@@ -18,13 +18,13 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-
 Route::post('/login', 'Api\AuthController@login')->name('login.api');
 Route::post('/register', 'Api\AuthController@register')->name('register.api');
 
-Route::middleware('auth:api')->group(function() {
-    Route::get('/songs/upload', 'Api\Songs\UploadController@getUploaded')->name('songs.upload');
-    Route::post('/songs/upload', 'Api\Songs\UploadController@upload')->name('songs.upload');
+Route::middleware('auth:api')->namespace('Api')->group(function() {
+    Route::post('/songs', 'SongController@store')->name('songs.store');
+    Route::get('/songs/upload', 'Songs\UploadController@getUploaded')->name('songs.upload');
+    Route::post('/songs/upload', 'Songs\UploadController@upload')->name('songs.upload');
 
     Route::get('/logout', 'Api\AuthController@logout')->name('logout');
 });
