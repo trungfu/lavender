@@ -1,12 +1,12 @@
 <?php
 
 
-namespace App\Http\Controllers\Api\Songs;
+namespace App\Http\Controllers\Api\Song;
 
 
 use App\Http\Controllers\Controller;
-use App\Http\Resources\UploadTemporary as UploadTemporaryResource;
-use App\Model\UploadTemporary;
+use App\Http\Resources\Upload as UploadResource;
+use App\Model\Upload;
 use Illuminate\Http\Request;
 
 class UploadController extends Controller
@@ -23,7 +23,7 @@ class UploadController extends Controller
 
         $user = $request->user('api');
 
-        $song = UploadTemporary::create([
+        $song = Upload::create([
             'path'    => $path,
             'type'    => self::SONG_TYPE,
             'user_id' => $user->id
@@ -41,6 +41,6 @@ class UploadController extends Controller
 
     public function getUploaded(Request $request)
     {
-        return UploadTemporaryResource::collection(UploadTemporary::all());
+        return UploadResource::collection(Upload::all());
     }
 }

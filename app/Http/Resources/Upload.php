@@ -4,7 +4,7 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class UploadTemporary extends JsonResource
+class Upload extends JsonResource
 {
     /**
      * Transform the resource into an array.

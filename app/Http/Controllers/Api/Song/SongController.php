@@ -1,19 +1,26 @@
 <?php
 
-namespace App\Http\Controllers\Api;
+namespace App\Http\Controllers\Api\Song;
 
-use App\Api\SongRepositoryInterface;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Api\SongRequest;
 use App\Http\Resources\Song as SongResource;
+use App\Repositories\Song\SongRepositoryInterface;
+use App\Repositories\Upload\UploadRepositoryInterface;
 use Illuminate\Http\Request;
 
 class SongController extends Controller
 {
     protected $songRepository;
+    protected $uploadRepository;
 
-    public function __construct(SongRepositoryInterface $songRepository)
+    public function __construct(
+        SongRepositoryInterface $songRepository,
+        UploadRepositoryInterface $uploadRepository
+    )
     {
         $this->songRepository = $songRepository;
+        $this->uploadRepository = $uploadRepository;
     }
 
     /**
@@ -22,9 +29,13 @@ class SongController extends Controller
      * @param \Illuminate\Http\Request $request
      * @return SongResource
      */
-    public function store(Request $request)
+    public function store(SongRequest $request)
     {
         $postData = $request->all();
+
+        $path = $this->uploadRepository->pop($postData['selected_upload'], ['id', 'path'])['path'];
+
+        $postData['source'] = $path;
 
         $song = $this->songRepository->persist($postData);
 

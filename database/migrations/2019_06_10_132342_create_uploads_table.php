@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateUploadTemporariesTable extends Migration
+class CreateUploadsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateUploadTemporariesTable extends Migration
      */
     public function up()
     {
-        Schema::create('upload_temporaries', function (Blueprint $table) {
+        Schema::create('uploads', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('path');
             $table->tinyInteger('type');
@@ -30,6 +30,6 @@ class CreateUploadTemporariesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('upload_temporaries');
+        Schema::dropIfExists('uploads');
     }
 }

@@ -7,6 +7,17 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Laravel\Passport\HasApiTokens;
 
+/**
+ * App\Model\User
+ *
+ * @property-read \Illuminate\Database\Eloquent\Collection|\Laravel\Passport\Client[] $clients
+ * @property-read \Illuminate\Notifications\DatabaseNotificationCollection|\Illuminate\Notifications\DatabaseNotification[] $notifications
+ * @property-read \Illuminate\Database\Eloquent\Collection|\Laravel\Passport\Token[] $tokens
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\User newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\User newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\User query()
+ * @mixin \Eloquent
+ */
 class User extends Authenticatable
 {
     use Notifiable, HasApiTokens;
