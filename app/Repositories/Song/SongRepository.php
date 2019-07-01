@@ -10,13 +10,9 @@ use App\Repositories\AbstractRepository;
 class SongRepository extends AbstractRepository implements SongRepositoryInterface
 {
 
-    public function find($id)
+    public function __construct(Song $song)
     {
-        return Song::find($id);
+        parent::__construct($song);
     }
 
-    public function persist($data)
-    {
-        return Song::create($data);
-    }
 }

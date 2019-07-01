@@ -11,33 +11,33 @@ use Illuminate\Http\Request;
 
 class SongController extends Controller
 {
-    protected $songRepository;
-    protected $uploadRepository;
+    protected $song_repository;
+    protected $upload_repository;
 
     public function __construct(
-        SongRepositoryInterface $songRepository,
-        UploadRepositoryInterface $uploadRepository
+        SongRepositoryInterface $song_repository,
+        UploadRepositoryInterface $upload_repository
     )
     {
-        $this->songRepository = $songRepository;
-        $this->uploadRepository = $uploadRepository;
+        $this->song_repository = $song_repository;
+        $this->upload_repository = $upload_repository;
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param \Illuminate\Http\Request $request
+     * @param SongRequest $request
      * @return SongResource
      */
     public function store(SongRequest $request)
     {
         $postData = $request->all();
 
-        $path = $this->uploadRepository->pop($postData['selected_upload'], ['id', 'path'])['path'];
+        $path = $this->upload_repository->pop($postData['selected_upload'], ['id', 'path'])['path'];
 
         $postData['source'] = $path;
 
-        $song = $this->songRepository->persist($postData);
+        $song = $this->song_repository->persist($postData);
 
         return new SongResource($song);
     }

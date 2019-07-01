@@ -10,21 +10,16 @@ use App\Repositories\AbstractRepository;
 class UploadRepository extends AbstractRepository implements UploadRepositoryInterface
 {
 
-    public function find($id)
+    public function __construct(Upload $upload)
     {
-        // TODO: Implement find() method.
-    }
-
-    public function persist($data)
-    {
-        // TODO: Implement persist() method.
+        parent::__construct($upload);
     }
 
     public function pop($id, $columns = ['*'])
     {
         $upload = Upload::find($id, $columns);
 
-        $uploadData = $upload->toArray();
+        $upload_data = $upload->toArray();
 
         try {
             $upload->delete();
@@ -32,6 +27,6 @@ class UploadRepository extends AbstractRepository implements UploadRepositoryInt
 
         }
 
-        return $uploadData;
+        return $upload_data;
     }
 }

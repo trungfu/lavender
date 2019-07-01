@@ -15,11 +15,11 @@ class UploadController extends Controller
 
     public function upload(Request $request)
     {
-        $uploadedSong = $request->file('song');
+        $uploaded_song = $request->file('song');
 
-        $file_name = str_replace(' ', '-', \Str::ascii($uploadedSong->getClientOriginalName()));
+        $file_name = str_replace(' ', '-', \Str::ascii($uploaded_song->getClientOriginalName()));
 
-        $path = $uploadedSong->storeAs('songs', $file_name, 'public');
+        $path = $uploaded_song->storeAs('songs', $file_name, 'public');
 
         $user = $request->user('api');
 
@@ -39,8 +39,4 @@ class UploadController extends Controller
         ]);
     }
 
-    public function getUploaded(Request $request)
-    {
-        return UploadResource::collection(Upload::all());
-    }
 }
