@@ -4,7 +4,7 @@
 namespace App\Repositories\Upload;
 
 
-use App\Model\Upload;
+use App\Model\Resource\Upload;
 use App\Repositories\AbstractRepository;
 
 class UploadRepository extends AbstractRepository implements UploadRepositoryInterface

@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Repositories\Song\AlbumRepository;
+use App\Repositories\Song\AlbumRepositoryInterface;
 use App\Repositories\Song\SongRepository;
 use App\Repositories\Song\SongRepositoryInterface;
 use App\Repositories\Upload\UploadRepository;
@@ -12,7 +14,8 @@ class AppServiceProvider extends ServiceProvider
 {
     public $bindings = [
         SongRepositoryInterface::class   => SongRepository::class,
-        UploadRepositoryInterface::class => UploadRepository::class
+        UploadRepositoryInterface::class => UploadRepository::class,
+        AlbumRepositoryInterface::class => AlbumRepository::class,
     ];
 
     /**
