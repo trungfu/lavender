@@ -21,11 +21,18 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::post('/login', 'Api\AuthController@login')->name('login.api');
 Route::post('/register', 'Api\AuthController@register')->name('register.api');
 
-Route::middleware('auth:api')->namespace('Api')->group(function() {
-    Route::get('/songs/init-data', 'Song\PageInitDataController@createSongInitData')->name('songs.init-data');
-    Route::post('/songs', 'Song\SongController@store')->name('songs.store');
-    Route::get('/songs/upload', 'Song\UploadController@getUploaded')->name('songs.upload');
-    Route::post('/songs/upload', 'Song\UploadController@upload')->name('songs.upload');
+Route::namespace('Api')->group(function() {
+    Route::middleware('auth:api')->group(function() {
+        Route::get('/songs/init-data', 'Song\PageInitDataController@createSongInitData')->name('songs.init-data');
+        Route::post('/songs', 'Song\SongController@store')->name('songs.store');
+        Route::get('/songs/upload', 'Song\UploadController@getUploaded')->name('songs.upload');
+        Route::post('/songs/upload', 'Song\UploadController@upload')->name('songs.upload');
 
-    Route::get('/logout', 'Api\AuthController@logout')->name('logout');
+        Route::get('/logout', 'Api\AuthController@logout')->name('logout');
+    });
+
+    Route::get('/songs/popular', 'Song\SongController@popular')->name('songs.popular');
+    Route::get('/songs/link/{id}', 'Song\SongController@link')->name('api.songs.link');
 });
+
+

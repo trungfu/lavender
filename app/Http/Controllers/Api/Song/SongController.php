@@ -11,16 +11,16 @@ use Illuminate\Http\Request;
 
 class SongController extends Controller
 {
-    protected $song_repository;
-    protected $upload_repository;
+    protected $songRepository;
+    protected $uploadRepository;
 
     public function __construct(
-        SongRepositoryInterface $song_repository,
-        UploadRepositoryInterface $upload_repository
+        SongRepositoryInterface $songRepository,
+        UploadRepositoryInterface $uploadRepository
     )
     {
-        $this->song_repository = $song_repository;
-        $this->upload_repository = $upload_repository;
+        $this->songRepository = $songRepository;
+        $this->uploadRepository = $uploadRepository;
     }
 
     /**
@@ -33,11 +33,11 @@ class SongController extends Controller
     {
         $postData = $request->all();
 
-        $path = $this->upload_repository->pop($postData['selected_upload'], ['id', 'path'])['path'];
+        $path = $this->uploadRepository->pop($postData['selected_upload'], ['id', 'path'])['path'];
 
         $postData['source'] = $path;
 
-        $song = $this->song_repository->persist($postData);
+        $song = $this->songRepository->persist($postData);
 
         return new SongResource($song);
     }
@@ -50,7 +50,7 @@ class SongController extends Controller
      */
     public function show($id)
     {
-        //
+        return response()->file('/home/viettrung/Music/Cho Anh.mp3');
     }
 
     /**
@@ -85,5 +85,19 @@ class SongController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function popular()
+    {
+        $songs = $this->songRepository->all();
+
+        return SongResource::collection($songs);
+    }
+
+    public function link($id)
+    {
+        $song = $this->songRepository->get($id);
+
+        return response()->file($song->source);
     }
 }

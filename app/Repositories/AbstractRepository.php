@@ -15,7 +15,7 @@ class AbstractRepository implements RepositoryInterface
         $this->model = $model;
     }
 
-    public function find($id, array $columns = ['*'])
+    public function get($id, array $columns = ['*'])
     {
         return $this->model->find($id);
     }
