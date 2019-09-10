@@ -42,6 +42,7 @@ class SongFile
                 'id'     => self::getSongId($this->filePath),
                 'title'  => $this->id3TagReader->getSongTitle(),
                 'source' => $this->id3TagReader->getSongPath(),
+                'length' => $this->id3TagReader->getPlayTime(),
             ]);
 
             if(!empty($this->id3TagReader->getSongAlbum())) {

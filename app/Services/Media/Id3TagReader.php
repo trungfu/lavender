@@ -45,4 +45,9 @@ class Id3TagReader
     {
         return $this->songInfo['filenamepath'];
     }
+
+    public function getPlayTime()
+    {
+        return $this->songInfo['playtime_seconds'];
+    }
 }

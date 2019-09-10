@@ -9,7 +9,7 @@ class Song extends JsonResource
     /**
      * Transform the resource into an array.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return array
      */
     public function toArray($request)
@@ -17,10 +17,11 @@ class Song extends JsonResource
 //        return parent::toArray($request);
 
         return [
-            'id' => $this->id,
-            'title' => $this->title,
-            'lyric' => $this->lyric,
-            'link' => route('api.songs.link', ['id' => $this->id]),
+            'id'     => $this->id,
+            'title'  => $this->title,
+            'lyric'  => $this->lyric,
+            'length' => $this->length,
+            'link'   => route('api.songs.link', ['id' => $this->id]),
         ];
     }
 }

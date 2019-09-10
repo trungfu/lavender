@@ -15,7 +15,7 @@ use Illuminate\Database\Eloquent\Model;
 class Song extends Model
 {
     protected $fillable = [
-        'id', 'title', 'source', 'lyric'
+        'id', 'title', 'source', 'lyric', 'length'
     ];
 
     public $incrementing = false;

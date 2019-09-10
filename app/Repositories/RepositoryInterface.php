@@ -6,7 +6,7 @@ namespace App\Repositories;
 
 interface RepositoryInterface
 {
-    public function get($id, array $columns = ['*']);
+    public function find($id, array $columns = ['*']);
     public function all(array $columns = ['*']);
     public function list(string $orderByColumn, $orderBy = 'desc', $with = [], $columns = ['*']);
     public function create(array $data);
