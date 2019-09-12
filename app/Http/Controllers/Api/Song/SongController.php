@@ -96,7 +96,7 @@ class SongController extends Controller
 
     public function link($id)
     {
-        $song = $this->songRepository->get($id);
+        $song = $this->songRepository->find($id);
 
         return response()->file($song->source);
     }
